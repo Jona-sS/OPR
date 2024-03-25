@@ -9,10 +9,10 @@ int main()
     const int nz = 3; // Höhe/Tiefe
     int ***matrix;
     //Matrix befüllen
-    matrix = (int ***)malloc(nz * sizeof(int));
+    matrix = (int ***)malloc(nz * sizeof(int**));
     for (int z = 0; z < nz; z++)
     {
-        matrix[z] = (int **)malloc(ny * sizeof(int));
+        matrix[z] = (int **)malloc(ny * sizeof(int*));
         for (int y = 0; y < ny; y++)
         {
             matrix[z][y] = (int *)malloc(nx * sizeof(int));
