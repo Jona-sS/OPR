@@ -57,7 +57,7 @@ int main()
 		}
 	}
 }
-void ausgabeKoerper(const Koerper &koerper){
+void ausgabeKoerper(const Koerper &koerper){ //übergabe als Refferenz ist bei größeren Datentypen besser, weil weniger auf den Stack kopiert wird
 	ausgabeVektor(koerper.position);
 	cout << "Geschwindigkeit:"; 
 	ausgabeVektor(koerper.geschwindigkeit);
