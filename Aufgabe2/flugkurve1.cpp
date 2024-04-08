@@ -17,10 +17,11 @@ struct Koerper
 	Vektor position;
 	Vektor geschwindigkeit;
 };
-int ausgabeKoerper(const Koerper koerper);
-Vektor mulVektor(const Vektor EINGANGS_VEKTOR,const float MULTIPLIKATOR);
-Vektor addVektor(const Vektor vektor1,const Vektor vektor2);
-int bewegeKoerper(Koerper &koerper,const Vektor gesamtkraft,const float dt);
+void ausgabeKoerper(const Koerper &koerper);
+void ausgabeVektor(const Vektor &vektor);
+Vektor mulVektor(const Vektor &EINGANGS_VEKTOR,const float MULTIPLIKATOR);
+Vektor addVektor(const Vektor &vektor1,const Vektor &vektor2);
+int bewegeKoerper(Koerper &koerper,const Vektor &gesamtkraft,const float dt);
 
 int main()
 {
@@ -49,30 +50,34 @@ int main()
 										   koerper.masse);
 		Vektor gesamtkraft = addVektor(reibungskraft, anziehungskraft);
 		// Ermittlung der neuen Position und neuen Geschwindigkeit
-		bewegeKoerper(koerper, gesamtkraft, dt);//Körper als Reff übergeben
+		bewegeKoerper(koerper, gesamtkraft, dt);//Körper als Reff übergeben //bei Zeiger Übergabe &koerper
 		if (koerper.position.y <= 0)
 		{
 			break;
 		}
 	}
 }
-int ausgabeKoerper(const Koerper koerper){
-	cout << "(" << koerper.position.x << "," << koerper.position.y << ")" << endl;
-	return 1;
+void ausgabeKoerper(const Koerper &koerper){
+	ausgabeVektor(koerper.position);
+	cout << "Geschwindigkeit:"; 
+	ausgabeVektor(koerper.geschwindigkeit);
 }
-Vektor mulVektor(const Vektor EINGANGS_VEKTOR,const float MULTIPLIKATOR){
+void ausgabeVektor(const Vektor &vektor){
+	cout << "(" << vektor.x << "," << vektor.y << ")" << endl;
+}
+Vektor mulVektor(const Vektor &EINGANGS_VEKTOR,const float MULTIPLIKATOR){
 	Vektor ausgangsVektor;
 	ausgangsVektor.x=EINGANGS_VEKTOR.x*MULTIPLIKATOR;
 	ausgangsVektor.y=EINGANGS_VEKTOR.y*MULTIPLIKATOR;
 	return ausgangsVektor;
 }
-Vektor addVektor(const Vektor vektor1,const Vektor vektor2){
+Vektor addVektor(const Vektor &vektor1,const Vektor &vektor2){
 	Vektor ausgangsVektor;
 	ausgangsVektor.x=vektor1.x+vektor2.x;
 	ausgangsVektor.y=vektor1.y+vektor2.y;
 	return ausgangsVektor;
 }
-int bewegeKoerper(Koerper &koerper,const Vektor gesamtkraft,const float dt){//alternativ Call by Reff(*koerper und ->)
+int bewegeKoerper(Koerper &koerper,const Vektor &gesamtkraft,const float dt){//alternativ Call by Reff(*koerper und ->)
 		// Ermittlung der neuen Geschwindigkeit v=dt*a -> F=m*a -> v=dt*(F/m)
 		koerper.geschwindigkeit.x += dt * (gesamtkraft.x/koerper.masse);
 		koerper.geschwindigkeit.y += dt * (gesamtkraft.y/koerper.masse);
