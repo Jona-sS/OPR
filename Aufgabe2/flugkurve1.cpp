@@ -8,19 +8,19 @@ using namespace std;
 
 struct Vektor
 {
-	double x;
-	double y;
+	float x;
+	float y;
 };
 struct Koerper
 {
-	int masse;
+	float masse;
 	Vektor position;
 	Vektor geschwindigkeit;
 };
-int ausgabeKoerper(Koerper koerper);
-Vektor mulVektor(Vektor EINGANGS_VEKTOR,float MULTIPLIKATOR);
-Vektor addVektor(Vektor vektor1,Vektor vektor2);
-int bewegeKoerper(Koerper *koerper,Vektor gesamtkraft,const float dt);
+int ausgabeKoerper(const Koerper koerper);
+Vektor mulVektor(const Vektor EINGANGS_VEKTOR,const float MULTIPLIKATOR);
+Vektor addVektor(const Vektor vektor1,const Vektor vektor2);
+int bewegeKoerper(Koerper &koerper,const Vektor gesamtkraft,const float dt);
 
 int main()
 {
@@ -49,14 +49,14 @@ int main()
 										   koerper.masse);
 		Vektor gesamtkraft = addVektor(reibungskraft, anziehungskraft);
 		// Ermittlung der neuen Position und neuen Geschwindigkeit
-		bewegeKoerper(&koerper, gesamtkraft, dt);//Körper mit Call by Reff übergeben
+		bewegeKoerper(koerper, gesamtkraft, dt);//Körper als Reff übergeben
 		if (koerper.position.y <= 0)
 		{
 			break;
 		}
 	}
 }
-int ausgabeKoerper(Koerper koerper){
+int ausgabeKoerper(const Koerper koerper){
 	cout << "(" << koerper.position.x << "," << koerper.position.y << ")" << endl;
 	return 1;
 }
@@ -66,20 +66,20 @@ Vektor mulVektor(const Vektor EINGANGS_VEKTOR,const float MULTIPLIKATOR){
 	ausgangsVektor.y=EINGANGS_VEKTOR.y*MULTIPLIKATOR;
 	return ausgangsVektor;
 }
-Vektor addVektor(Vektor vektor1,Vektor vektor2){
+Vektor addVektor(const Vektor vektor1,const Vektor vektor2){
 	Vektor ausgangsVektor;
 	ausgangsVektor.x=vektor1.x+vektor2.x;
 	ausgangsVektor.y=vektor1.y+vektor2.y;
 	return ausgangsVektor;
 }
-int bewegeKoerper(Koerper *koerper,Vektor gesamtkraft,const float dt){
-		// Ermittlung der neuen Geschwindigkeit v=dt*a -> F=m+a -> v=dt*(F/m)
-		koerper->geschwindigkeit.x += dt * (gesamtkraft.x/koerper->masse);
-		koerper->geschwindigkeit.y += dt * (gesamtkraft.y/koerper->masse);
+int bewegeKoerper(Koerper &koerper,const Vektor gesamtkraft,const float dt){//alternativ Call by Reff(*koerper und ->)
+		// Ermittlung der neuen Geschwindigkeit v=dt*a -> F=m*a -> v=dt*(F/m)
+		koerper.geschwindigkeit.x += dt * (gesamtkraft.x/koerper.masse);
+		koerper.geschwindigkeit.y += dt * (gesamtkraft.y/koerper.masse);
 
 		// Ermittlung der neuen Position
-		koerper->position.x += dt * koerper->geschwindigkeit.x;
-		koerper->position.y += dt * koerper->geschwindigkeit.y;
+		koerper.position.x += dt * koerper.geschwindigkeit.x;
+		koerper.position.y += dt * koerper.geschwindigkeit.y;
 
 		return 1;
 }
