@@ -79,7 +79,7 @@ Vektor addVektor(const Vektor &vektor1,const Vektor &vektor2){
 }
 int bewegeKoerper(Koerper &koerper,const Vektor &gesamtkraft,const float dt){//alternativ Call by Reff(*koerper und ->)
 		// Ermittlung der neuen Geschwindigkeit v=dt*a -> F=m*a -> v=dt*(F/m)
-		koerper.geschwindigkeit.x += dt * (gesamtkraft.x/koerper.masse);
+		koerper.geschwindigkeit.x += dt * (gesamtkraft.x/koerper.masse);//muVektro und addVektro Funktionen nutzen wäre schoner
 		koerper.geschwindigkeit.y += dt * (gesamtkraft.y/koerper.masse);
 
 		// Ermittlung der neuen Position
