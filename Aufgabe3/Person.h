@@ -1,9 +1,10 @@
-#ifndef Person
+//#ifndef Person
 //#define Person
-#pragma Person
-#include "Anschrift.h"
+#pragma once
+//#include "Anschrift.h"
+#include <string> 
 #include <vector>
-#include <iostream>
+#include <sstream>
 using namespace std;
 class Person{
     private:
@@ -19,17 +20,18 @@ class Person{
         return 0;
     }
     public:
-    Person (){//Standartkonstruktor
-
-    }
-    Person (string const& name){
-       this->_name= _name;
+    Person(){
+        _name = "Anonymus";
+        this->_anschrift=Anschrift("unbekannte Straße", "unbekannte Hausnummer", 0, "unbekannte Stadt");   
+    }// = default;
+    Person (const string& name){
+       _name= name;
     }
     string name(){
         return this->_name;
     }
-    void setzeAnschrift(Anschrift anschrift){
-        this->_anschrift=anschrift;
+    void setzeAnschrift(Anschrift neueAnschrift){
+        this->_anschrift=neueAnschrift;
     }
     void setzeAnschrift(string const& strasse, string const& hausnummer, int postleitzahl, string const& stadt){
         this->_anschrift=Anschrift(strasse, hausnummer, postleitzahl, stadt);
@@ -41,23 +43,26 @@ class Person{
         return _freunde.size();
     }
     Person* freund(int nummer){
-        //return _freunde[nummer];
+        if(nummer>=_freunde.size()||nummer<0){
+            return nullptr;
+        }
         return _freunde.at(nummer);
     }
     void befreunden(Person& neuerFreund){
         _freunde.push_back(&neuerFreund);
+        neuerFreund._freunde.push_back(this);
     }
    string text()const{//Konstante Funktion wegen Konstanten Objekt
-        cout << this->_name << endl; 
-        this->_anschrift.text();
+        stringstream ss;
+        ss << this->_name << endl << this->_anschrift.text();
         if(_freunde.size()==0){
-            cout << "--- keine Freunde" << endl; 
+            ss << endl <<"--- keine Freunde"; 
         }else{
             for(int i = 0; i<_freunde.size();i++){
-                cout << "--- Freund: " << _freunde.at(i)->text() <<endl; 
+                ss << endl <<"--- Freund: " << _freunde.at(i)->_name << " ("<<_freunde.at(i) <<")"; 
             }
         }
-        //return ; String returnen und nicht ausgeben!
+        return ss.str();
    }
 };
-#endif
+//#endif

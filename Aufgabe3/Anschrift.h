@@ -1,31 +1,32 @@
-#ifndef Anschrift
-#define Anschrift
-#include <iostream>
+//#ifndef Anschrift
+//#define Anschrift
+#pragma once
+#include <string> 
+#include <sstream>
 using namespace std;
 
 class Anschrift
 {
-//private:
-public:
+private:
     string _strasse;
     string _hausnummer;
     int _postleitzahl;
     string _stadt;
 
-//public:
-    Anschrift(){ // Konstruktor
-    }
-    Anschrift(string const& strasse, string const& hausnummer, int postleitzahl, string const &stadt)
+public:
+    Anschrift() = default;
+    Anschrift(const string& strasse,const string& hausnummer, int postleitzahl,const string&stadt)
     { // Überladen
-        this->_strasse = _strasse;
-        this->_hausnummer = _hausnummer;
-        this->_postleitzahl = _postleitzahl;
-        this->_stadt = _stadt;
+        _strasse = strasse;
+        _hausnummer = hausnummer;
+        _postleitzahl = postleitzahl;
+        _stadt = stadt;
     }
     string text() const
     {
-        cout << "--- wohnhaft in " << this->_postleitzahl << " " << this->_stadt << ", " << this->_strasse << " " <<this->_hausnummer<<  endl;
-        //return "--- wohnhaft in " << this->_postleitzahl << " " << this->_stadt << ", " << this->_strasse << " " <<this->_hausnummer;
+        stringstream ss;
+        ss << "--- wohnhaft in " << this->_postleitzahl << " " << this->_stadt << ", " << this->_strasse << " " <<this->_hausnummer;
+        return ss.str();
     }
 };
-#endif
+//#endif

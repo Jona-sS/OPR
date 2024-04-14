@@ -36,7 +36,7 @@ int main() {
 	person.befreunden(donald);
 	log(person);
 	
-	Anschrift anschrift("Erpelhofer Str.", "12", 90560, "Entenhausen");
+	Anschrift anschrift("Erpelhofer Str.", "12", 90560 , "Entenhausen");
 	cout << "\nDonald zieht um nach " << anschrift.text() << endl;
 	donald.setzeAnschrift(anschrift);
 	log(donald);
