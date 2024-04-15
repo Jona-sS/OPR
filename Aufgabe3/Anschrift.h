@@ -1,7 +1,7 @@
-//#ifndef Anschrift
-//#define Anschrift
+// #ifndef Anschrift
+// #define Anschrift
 #pragma once
-#include <string> 
+#include <string>
 #include <sstream>
 using namespace std;
 
@@ -15,18 +15,18 @@ private:
 
 public:
     Anschrift() = default;
-    Anschrift(const string& strasse,const string& hausnummer, int postleitzahl,const string&stadt)
+    Anschrift(const string &strasse, const string &hausnummer, int postleitzahl, const string &stadt)
     { // Überladen
         _strasse = strasse;
-        _hausnummer = hausnummer;
-        _postleitzahl = postleitzahl;
-        _stadt = stadt;
+        this->_hausnummer = hausnummer;
+        this->_postleitzahl = postleitzahl;
+        this->_stadt = stadt;
     }
     string text() const
     {
         stringstream ss;
-        ss << "--- wohnhaft in " << this->_postleitzahl << " " << this->_stadt << ", " << this->_strasse << " " <<this->_hausnummer;
+        ss << "--- wohnhaft in " << this->_postleitzahl << " " << this->_stadt << ", " << this->_strasse << " " << this->_hausnummer;
         return ss.str();
     }
 };
-//#endif
+// #endif
