@@ -9,7 +9,7 @@ SCHALTERADDS = -std=c++2a -Wall -Wextra -O2
 game.exe: Game.o ComputerPlayer.o HumanPlayer.o RockPaperScissor_nosolution.o ShapeGenerator.o utils.o
 	$(SCHALTER) $(SCHALTERADDS) -o game.exe Game.o ComputerPlayer.o HumanPlayer.o RockPaperScissor_nosolution.o ShapeGenerator.o utils.o
 
-RockPaperScissor_nosolution.o: RockPaperScissor_nosolution.cpp Game.h
+RockPaperScissor_nosolution.o: RockPaperScissor_nosolution.cpp Game.h HumanPlayer.h ComputerPlayer.h
 	$(SCHALTER) $(SCHALTERADDS) -c -o RockPaperScissor_nosolution.o RockPaperScissor_nosolution.cpp
 
 Game.o: Game.cpp Game.h utils.h HumanPlayer.h ComputerPlayer.h

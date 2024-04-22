@@ -4,7 +4,7 @@
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 
-bool Game::make_turn()
+bool Game::make_turn(HumanPlayer player,ComputerPlayer computer) //damit nicht in jedem Durchlauf neue Objekte erstellt werden
 {
 	game_outcome_type result = game_outcome_type::lose;
 
@@ -23,16 +23,17 @@ bool Game::make_turn()
 	//	     --> Falls Mensch gewinnt  -> result = game_outcome_type::win
 	//       --> Falls Rechner gewinnt -> result = game_outcome_type::lose
 	//       --> Sonst -> result = game_outcome_type::tie (nochmal Wiederholen)
-do{
-	HumanPlayer player;
-	shape_type ErgebnisseM = player.make_turn();
-	std::cout << "Human choose: "<< to_string(ErgebnisseM)<< std::endl;
-	ComputerPlayer computer;
-	shape_type ErgebnisseR = computer.make_turn();
-	std::cout << "Computer choose: "<< to_string(ErgebnisseR)<< std::endl;
-	result = compare(ErgebnisseM,ErgebnisseR);
-	//std::cout << (int)result;
-	}while (result == game_outcome_type::tie);
+	do
+	{
+		//HumanPlayer player;
+		shape_type ErgebnisseM = player.make_turn();
+		std::cout << "Human choose: " << to_string(ErgebnisseM) << std::endl;
+		//ComputerPlayer computer;
+		shape_type ErgebnisseR = computer.make_turn();
+		std::cout << "Computer choose: " << to_string(ErgebnisseR) << std::endl;
+		result = compare(ErgebnisseM, ErgebnisseR);
+		// std::cout << (int)result;
+	} while (result == game_outcome_type::tie);
 	//
 	// TODO 3 End
 	//
