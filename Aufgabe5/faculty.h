@@ -31,9 +31,6 @@ private:
 	std::vector<Course*> _courses;
 	std::vector<Student*> _students;
 	std::vector<Person*> _teachers;
-	static bool cmp_StudentByAge(Student* A, Student* B);
-	static bool cmp_StudentByAvgGrade(Student* A, Student* B);
-	static bool cmp_PersonsByAge(Person* A, Person* B);
 };
 
 #endif 

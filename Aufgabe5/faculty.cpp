@@ -2,39 +2,67 @@
 #include "student.h"
 #include "course.h"
 #include <algorithm>
-
-
-Faculty::Faculty(const std::string& name) : _name{name} {} //Konstruktor
+namespace
+{
+	// Compare Funktionen für Sort
+	/*bool cmp_StudentByAge(Student *A, Student *B){
+		return A->GetAge()<B->GetAge();
+	}
+	*/
+	bool cmp_StudentByAvgGrade(Student *A, Student *B)
+	{
+		return A->GetAverageGrade() < B->GetAverageGrade();
+	}
+	bool cmp_PersonsByAge(Person *A, Person *B)
+	{
+		return A->GetAge() < B->GetAge();
+	}
+}
+Faculty::Faculty(const std::string &name) : _name{name} {} // Konstruktor
 
 /// Ihre Code 7 (anfang)
 ///
 ///  Bitte implementieren Sie den Destruktor
-///   
- Faculty::~Faculty(){}; //ggf noch delete[] ?
+///
+Faculty::~Faculty()
+{
+	for (auto teacher : _teachers)
+	{
+		delete teacher;
+	}
+	for (auto student : _students)
+	{
+		delete student;
+	}
+	for (auto cours : _courses)
+	{
+		delete cours;
+	}
+};
 /// Ihre Code (ende)
 
-void Faculty::PrepareCourse(const std::string& title)
+void Faculty::PrepareCourse(const std::string &title)
 {
 	_courses.push_back(new Course(title));
 }
 
-void Faculty::HireTeacher(const std::string& name, int age)
+void Faculty::HireTeacher(const std::string &name, int age)
 {
 	_teachers.push_back(new Person(name, age));
 }
 
-void Faculty::RegisterStudent(const std::string& name, int age)
+void Faculty::RegisterStudent(const std::string &name, int age)
 {
-/// Ihre Code 3 (anfang)
-///
-///  1) Bitte erstellen Sie eine neue Instanz der Klasse Student, indem Sie den Operator new verwenden
-///  2) Und zu vorhandenem Vektor _students hinzuf�gen
-///   
-_students.push_back(new Student(name,age));
-/// Ihre Code (ende)
+	/// Ihre Code 3 (anfang)
+	///
+	///  1) Bitte erstellen Sie eine neue Instanz der Klasse Student, indem Sie den Operator new verwenden
+	///  2) Und zu vorhandenem Vektor _students hinzuf�gen
+	///
+	_students.push_back(new Student(name, age));
+	/// Ihre Code (ende)
 }
 
-const Course* Faculty::GetCourse(const std::string& title) const
+const Course *Faculty::GetCourse(const std::string &title) const
 {
 	for (const auto course : _courses)
 	{
@@ -47,7 +75,7 @@ const Course* Faculty::GetCourse(const std::string& title) const
 	return nullptr;
 }
 
-Student* Faculty::GetStudent(const std::string& name) const
+Student *Faculty::GetStudent(const std::string &name) const
 {
 	for (const auto student : _students)
 	{
@@ -60,9 +88,9 @@ Student* Faculty::GetStudent(const std::string& name) const
 	return nullptr;
 }
 
-std::vector<Student*> Faculty::GetAllStudentsSortedByAge()
+std::vector<Student *> Faculty::GetAllStudentsSortedByAge()
 {
-	std::vector<Student*> result(_students);
+	std::vector<Student *> result(_students);
 
 	/// Ihre Code 4 (anfang)
 	///
@@ -71,15 +99,15 @@ std::vector<Student*> Faculty::GetAllStudentsSortedByAge()
 	///   Tip: Man kann std::sort nutzen
 	///        siehe auch Referenzen  http://www.cplusplus.com/reference/algorithm/sort/?kw=sort
 	///                               https://en.cppreference.com/w/cpp/algorithm/sort
-	std::sort (result.begin(), result.end(),cmp_StudentByAge);
+	std::sort(result.begin(), result.end(), cmp_PersonsByAge);
 	/// Ihre Code (ende)
 
 	return result;
 }
 
-std::vector<Student*> Faculty::GetAllStudentsSortedByAvgGrade()
+std::vector<Student *> Faculty::GetAllStudentsSortedByAvgGrade()
 {
-	std::vector<Student*> result(_students);
+	std::vector<Student *> result(_students);
 
 	/// Ihre Code 5 (anfang)
 	///
@@ -89,20 +117,20 @@ std::vector<Student*> Faculty::GetAllStudentsSortedByAvgGrade()
 	///        siehe auch Referenzen  http://www.cplusplus.com/reference/algorithm/sort/?kw=sort
 	///                               https://en.cppreference.com/w/cpp/algorithm/sort
 
-	std::sort (result.begin(), result.end(),cmp_StudentByAvgGrade);
+	std::sort(result.begin(), result.end(), cmp_StudentByAvgGrade);
 	/// Ihre Code (ende)
 
 	return result;
 }
 
-std::vector<Person*> Faculty::GetAllPersonsSortedByAge()
+std::vector<Person *> Faculty::GetAllPersonsSortedByAge()
 {
-	std::vector<Person*> result;
+	std::vector<Person *> result;
 
 	/// Ihre Code 6 (anfang)
 	///
 	///   Bitte sortieren Sie alle Studenten und Lehrer (variable result) nach zunehmendem Alter.
-	///   Nicht vergessen zuerst result vorberateiten so dass alle zeigern zu Personen (von __students 
+	///   Nicht vergessen zuerst result vorberateiten so dass alle zeigern zu Personen (von __students
 	///   und _teachers) sind enthalten.
 	///
 	///   Tip1: Alternative zu push_back ist insert Methode (mit erste argument result.end())
@@ -110,22 +138,12 @@ std::vector<Person*> Faculty::GetAllPersonsSortedByAge()
 	///   Tip2: Man kann std::sort nutzen
 	///         siehe auch Referenzen  http://www.cplusplus.com/reference/algorithm/sort/?kw=sort
 	///                                https://en.cppreference.com/w/cpp/algorithm/sort
-	//zwei Vektoren zu einem result Vektor zusammen führen
-	result.insert(result.end(),_students.begin(),_students.end());
-	result.insert(result.end(),_teachers.begin(),_teachers.end());
+	// zwei Vektoren zu einem result Vektor zusammen führen
+	result.insert(result.end(), _students.begin(), _students.end());
+	result.insert(result.end(), _teachers.begin(), _teachers.end());
 
-	std::sort (result.begin(), result.end(),cmp_PersonsByAge);
+	std::sort(result.begin(), result.end(), cmp_PersonsByAge);
 	/// Ihre Code (ende)
 
 	return result;
 }
-	//Compare Funktionen für Sort
-	bool Faculty::cmp_StudentByAge(Student *A, Student *B){
-		return A->GetAge()<B->GetAge();
-	}
-	bool Faculty::cmp_StudentByAvgGrade(Student* A, Student* B){
-		return A->GetAverageGrade()<B->GetAverageGrade();
-	}
-	bool Faculty::cmp_PersonsByAge(Person* A, Person* B){
-		return A->GetAge()<B->GetAge();
-	}
