@@ -6,7 +6,9 @@ class Luftfahrzeug : public Verkehrsmittel
     int _maxFlughöhe;
 public:
     Luftfahrzeug(std::string const &name, int maxFlughöhe):Verkehrsmittel(name), _maxFlughöhe{maxFlughöhe}{}
-    Luftfahrzeug(Luftfahrzeug const &luftfahrzeug):Verkehrsmittel(luftfahrzeug), _maxFlughöhe{luftfahrzeug._maxFlughöhe}{}
+    Luftfahrzeug(Luftfahrzeug const &luftfahrzeug):Verkehrsmittel(luftfahrzeug), _maxFlughöhe{luftfahrzeug._maxFlughöhe}{
+        std::cout << "Kopiere Luftfahrzeug"<<std::endl;
+    }
     int maxFlughoehe() const{
         return _maxFlughöhe;
     }

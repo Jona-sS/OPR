@@ -9,9 +9,9 @@ private:
 
 public:
    Verkehrsmittel(std::string const &name) : _name{name}{}
-   Verkehrsmittel(Verkehrsmittel const &verkehrsmittel) : _name{"Kopie von "+verkehrsmittel._name}, Vektor(verkehrsmittel._position.x,verkehrsmittel._position.y){
+   Verkehrsmittel(Verkehrsmittel const &verkehrsmittel) : _name{"Kopie von "+verkehrsmittel._name}, _position{verkehrsmittel._position}{
       std::cout << "Kopiere Verkehrsmittel ("+_name+")"<<std::endl;
-            std::cout<<verkehrsmittel._position.x<<std::endl;
+            //_position.x=verkehrsmittel._position.x;
    }
    std::string const &name() const
    {

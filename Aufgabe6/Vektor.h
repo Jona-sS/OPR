@@ -6,7 +6,6 @@ class Vektor
 public:
     Vektor():x{0}, y{0}{}
     Vektor(int x_neu, int y_neu):x(x_neu), y(y_neu){
-                    std::cout<<"hier"<<std::endl;
     }
     std::string text() const
     {
