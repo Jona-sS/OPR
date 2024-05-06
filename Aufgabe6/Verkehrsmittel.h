@@ -1,10 +1,10 @@
 #pragma once
 #include "Vektor.h"
 
-class Verkehrsmittel : public Vektor
+class Verkehrsmittel
 {
 private:
-   std::string _name;
+   std::string const _name;
    Vektor _position;
 
 public:

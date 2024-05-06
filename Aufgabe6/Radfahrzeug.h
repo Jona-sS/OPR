@@ -3,7 +3,7 @@
 class Radfahrzeug : public Verkehrsmittel
 {
     private:
-    int _anzahlRaeder;
+    int const _anzahlRaeder;
 public:
     Radfahrzeug(std::string const &name, int anzahlRaeder):Verkehrsmittel(name), _anzahlRaeder{anzahlRaeder}{}
     Radfahrzeug(Radfahrzeug const &radfahrzeug):Verkehrsmittel(radfahrzeug), _anzahlRaeder{radfahrzeug._anzahlRaeder}{

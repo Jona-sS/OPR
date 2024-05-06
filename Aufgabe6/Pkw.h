@@ -3,7 +3,7 @@
 class Pkw : public Radfahrzeug
 {
     private:
-    int _anzahlTueren;
+    int const _anzahlTueren;
 public:
     Pkw(std::string const &name, int anzahlTueren):Radfahrzeug(name,4), _anzahlTueren{anzahlTueren}{}
     Pkw(Pkw const &pkw):Radfahrzeug(pkw), _anzahlTueren{pkw._anzahlTueren}{
