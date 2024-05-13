@@ -112,7 +112,7 @@ class Object3D
 public:
     Object3D(const string &name, const Shape *baseArea, double height) : mName{name}, mBaseArea{baseArea}, mHeight{height}
     {
-        //if (mBaseArea != nullptr)
+        if (mBaseArea != nullptr)
         {
             /// Ihre Code6 (anfang)
             ///
@@ -130,7 +130,7 @@ public:
 
     ~Object3D()
     {
-        //delete mBaseArea;
+        delete mBaseArea;
     }
 
     double getVolume() const
@@ -185,7 +185,7 @@ void TestPrism()
     ///
     const Object3D obj("prism0", new Triangle(4,13,15),10);
     //cout << "Voulemen= " << obj.getVolume() << "Oberfläche= " << obj.getSurfaceArea()<< endl;
-    const bool ok = std::abs(obj.getVolume() - 240) < 1e-6 && std::abs(obj.getSurfaceArea() - 368) < 1e-6;
+    const bool ok = std::abs(obj.getVolume() - 240) < 1e-6 && std::abs(obj.getSurfaceArea() - 368) < 1e-6; //Floatingpointvergleich wegen ungenauigkeiten in Berechungen
     /// Ihre Code7 (ende)
 
     cout << " TestPrism => " << (ok ? "OK" : "NOK") << endl;
