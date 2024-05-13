@@ -24,9 +24,7 @@ public:
         /// Ihre Code1 (anfang)
         ///
         ///  Bitte berechnen Sie die Fl�che des Rechtecks
-
         return mA * mB;
-
         /// Ihre Code1 (ende)
     }
 
@@ -35,9 +33,7 @@ public:
         /// Ihre Code2 (anfang)
         ///
         /// Bitte berechnen Sie den Umfang des Rechtecks
-
         return mA * 2 + mB * 2;
-
         /// Ihre Code2 (ende)
     }
 
@@ -60,9 +56,7 @@ public:
         /// Bitte berechnen Sie die Fl�che des Kreises
         ///
         /// Tip: Konstante pi ist definiert mit macro M_PI
-
         return mR * mR * M_PI;
-
         /// Ihre Code3 (ende)
     }
 
@@ -73,9 +67,7 @@ public:
         ///  Bitte berechnen Sie den Umfang des Kreises
         ///
         /// Tip: Konstante pi ist definiert mit macro M_PI
-
         return 2 * M_PI * mR;
-
         /// Ihre Code4 (ende)
     }
 
@@ -110,8 +102,7 @@ public:
 private:
     const double mA;
     const double mB;
-    const double mC;
-   //double s;         
+    const double mC;       
 };
 
 /// Ihre Code5 (ende)
@@ -121,7 +112,7 @@ class Object3D
 public:
     Object3D(const string &name, const Shape *baseArea, double height) : mName{name}, mBaseArea{baseArea}, mHeight{height}
     {
-        if (mBaseArea != nullptr)
+        //if (mBaseArea != nullptr)
         {
             /// Ihre Code6 (anfang)
             ///
@@ -139,7 +130,7 @@ public:
 
     ~Object3D()
     {
-        delete mBaseArea;
+        //delete mBaseArea;
     }
 
     double getVolume() const
@@ -192,10 +183,9 @@ void TestPrism()
     ///
     /// Tip: Eine m�glichkeit um runde Werte f�r Gesamtvolumen/Oberfl�che zu bekommen, nutzen Kanten 4, 13 und 15 und H�he 10
     ///
-    const Object3D obj("prism0", new Triangle(4,5,13),10);
+    const Object3D obj("prism0", new Triangle(4,13,15),10);
     //cout << "Voulemen= " << obj.getVolume() << "Oberfläche= " << obj.getSurfaceArea()<< endl;
-    const bool ok = std::abs(obj.getVolume() - 303.973683) < 1e-6 && std::abs(obj.getSurfaceArea() - 280.794736) < 1e-6;//anpassen
-
+    const bool ok = std::abs(obj.getVolume() - 240) < 1e-6 && std::abs(obj.getSurfaceArea() - 368) < 1e-6;
     /// Ihre Code7 (ende)
 
     cout << " TestPrism => " << (ok ? "OK" : "NOK") << endl;
