@@ -9,9 +9,9 @@ class Orchester{
         Orchester(){
             std::cout << "Konstruktor: ~Orchester()"<<std::endl;
         }
-        virtual~Orchester(){
+        virtual~Orchester(){//muss nicht virtuel
             std::cout << "Destruktor: ~Orchester()"<<std::endl;
-            for(Musiker const* musiker : _musiker){
+            for(Musiker const* musiker : _musiker){//auto Datentyp verwenden
                 delete musiker;
             }
         }

@@ -29,7 +29,7 @@ public:
     void weiseInstrumentZu(Musikinstrument const *instrument)
     {
         if (besitztInstrument)
-        {
+        {//nicht umbedingt nötig delete handelt das 
             delete _musikinstrument;
         }
         _musikinstrument = instrument;
@@ -38,7 +38,7 @@ public:
     }
     void spielen() const
     {
-        // if (_musikinstrument !=nullptr )
+        // if (_musikinstrument !=nullptr ) -> muss dann auch als nullptr initailiert werden, sonst steht iwas drinen
         if (besitztInstrument)
         {
             std::cout << _name << " spielt " << _musikinstrument->liefereName() << std::endl;

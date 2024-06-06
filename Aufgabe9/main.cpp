@@ -6,7 +6,7 @@ class A
 {
 public:
 	virtual void a() {}
-	virtual ~A(){}
+	virtual ~A(){}//ergänzt
 };
 
 class B : public A 
@@ -18,16 +18,16 @@ public:
 		this->s = s;
 		info("B()");
 	}
-	virtual ~B() 
+	~B() override //elternklasse schon virtual
 	{
 		info("~B()");
 	}
-	virtual void a()//"vitual" 
+	 void a() override
 	{
 		s += "1";
 		info("B::a()");
 	}
-	virtual void b() 
+	void b() 
 	{
 		s += "2";
 		info("B::b()");
@@ -60,7 +60,7 @@ public:
 	{
 		info("C()");
 	}
-	virtual ~C() 
+	 ~C() 
 	{
 		info("~C()");
 	}
@@ -103,4 +103,3 @@ int main()
 	delete bc;
 	cout << "zzz " << B::liefereIdStat() << endl;
 }
-	
